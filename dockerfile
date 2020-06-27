@@ -11,12 +11,18 @@ LABEL descriptio="Container para rodar APP com PM2"
 
 RUN apt update
 RUN apt upgrade
-RUN apt install -y pm2
+RUN apt install -y npm
+RUN npm install pm2 -g
 
 #Como iremos usar postgres em outro container, e o código não vai salvar nada localmente, não vejo utilidade para criação de volumes
 
 #Copiando arquivos do APP para o docker
 COPY . /SUFLEX
 
+#Install dependencias
+RUN cd ./SUFLEX && npm install
+
+EXPOSE 3000
+
 #Criando comando de inicialização
-CMD ["pm2-runtime", "/SUFLEX/server.js"]
+CMD ["pm2","start", "./SUFLEX/server.js"]
