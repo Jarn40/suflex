@@ -7,13 +7,13 @@ services:
         ports:
             - '3000:3000'
         depends_on: 
-            - docker-db
+            - dockerdb
         networks: 
             - backend
         links:
-            - docker-db
+            - dockerdb
             
-    docker-db:
+    dockerdb:
         image: postgres
         restart: always
         environment: 
