@@ -26,6 +26,19 @@ services:
             - backend
         volumes:
             - pgdata:/var/lib/postgresql/data/pgdata
+
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "jarn40@suflex.com"
+            PGADMIN_DEFAULT_PASSWORD: "PgAdmin2019!"
+        ports:
+            - "5000:80"
+        depends_on:
+            - db
+        networks:
+            - backend
+
 volumes:
     pgdata:
     
