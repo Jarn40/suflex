@@ -11,7 +11,7 @@ LABEL descriptio="Container para rodar APP com PM2"
 #Comandos Pos instalacao do OS
 
 RUN apt update
-RUN apt DEBIAN_FRONTEND="noninteractive" install -y npm
+RUN DEBIAN_FRONTEND="noninteractive" apt install -y npm
 RUN npm install pm2 -g
 
 #Como iremos usar postgres em outro container, e o código não vai salvar nada localmente, não vejo utilidade para criação de volumes
