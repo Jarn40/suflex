@@ -1,0 +1,30 @@
+version: '3.4'
+
+
+services: 
+    docker-app:
+        build: .
+        name: docker-app
+        restart: always
+        ports:
+            - '3000:3000'
+        depends_on: 
+            - docker-db
+        networks: 
+            - backend
+        links:
+            - "docker-db"
+            
+    docker-db:
+        image: postgres
+        restart: always
+        name: docker-db
+        environment: 
+            POSTGRES_PASSWORD: mysecretpassword
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: suflexdb
+        volumes: 
+            - ./pgdata:/var/lib/postgresql/data/pgdata
+        ports:
+            - '5432:5432'
+        

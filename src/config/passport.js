@@ -29,8 +29,7 @@ passport.use(new passportLocal({
       return done(null, false);
     }
 
-    const passwordMatch = await user.checkPassword(password);
-    if (!passwordMatch) {
+    if (user.password !== password) {
       return done(null, false);
     }
     done(null, user);

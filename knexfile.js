@@ -3,7 +3,7 @@ module.exports = {
     development: {
       client: 'pg',
       connection: {
-        host : '192.168.27.254',
+        host : 'docker-db',
         user : 'postgres',
         password : 'mysecretpassword',
         database : 'suflexdb'
@@ -14,6 +14,9 @@ module.exports = {
       },
       migrations: {
         directory: './src/config/migrations'
+      },
+      seeds:{
+        directory: './src/config/seeds'
       }
     },
   

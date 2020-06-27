@@ -14,8 +14,6 @@ RUN apt update
 RUN DEBIAN_FRONTEND="noninteractive" apt install -y npm
 RUN npm install pm2 -g
 
-#Como iremos usar postgres em outro container, e o código não vai salvar nada localmente, não vejo utilidade para criação de volumes
-
 #Copiando arquivos do APP para o docker
 COPY . .
 
