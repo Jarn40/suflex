@@ -1,10 +1,8 @@
 version: '3.4'
 
-
 services: 
     docker-app:
         build: .
-        name: docker-app
         restart: always
         ports:
             - '3000:3000'
@@ -18,13 +16,17 @@ services:
     docker-db:
         image: postgres
         restart: always
-        name: docker-db
         environment: 
             POSTGRES_PASSWORD: mysecretpassword
-            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
             POSTGRES_DB: suflexdb
         volumes: 
             - ./pgdata:/var/lib/postgresql/data/pgdata
         ports:
             - '5432:5432'
-        
+        networks: 
+            - backend
+            
+networks: 
+    backend:
+        driver: bridge
