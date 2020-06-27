@@ -1,12 +1,14 @@
+require('dotenv').config()
+
 module.exports = {
   
     development: {
       client: 'pg',
       connection: {
         host : 'docker-db',
-        user : 'postgres',
-        password : 'mysecretpassword',
-        database : 'suflexdb'
+        user : process.env.POSTGRES_USER,
+        password : process.env.POSTGRES_PASSWORD,
+        database : process.env.POSTGRES_DB
         },
       pool: {
         min: 2,
