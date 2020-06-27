@@ -1,5 +1,5 @@
 #Instalando OS base do container
-FROM ubuntu:18.04
+FROM nodejscn/node
 
 
 #Informacões sobre o container
@@ -11,7 +11,7 @@ LABEL descriptio="Container para rodar APP com PM2"
 
 RUN apt update
 RUN apt upgrade
-RUN apt install -y pm2 nodejs
+RUN apt install -y pm2
 
 #Como iremos usar postgres em outro container, e o código não vai salvar nada localmente, não vejo utilidade para criação de volumes
 
