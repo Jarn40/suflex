@@ -6,3 +6,35 @@
   4) execute ```docker exec suflex_app_1 bash -c 'npx knex migrate:latest; npx knex seed:run'``` para inicializar o banco com um usuario admin:admin
    
 
+  # Rotas
+  ### Autenticar
+    post (IP_SERVIDOR)/user/logar
+        {
+            login: admin,
+            password: admin
+        }
+    
+    response : token
+
+    utilizar o token em todas as outras rotas.
+
+### Adicionar Evento
+    post (IP_SERVIDOR)/events/new
+        {
+            date: dataString,
+            description: descricao,
+            user_id: id do usuário (disponivel ao decodificar o JWT token)
+        }
+        header
+            {
+                authorization: token
+            }
+
+### Buscar Eventos
+    get (IP_SERVIDOR)/events
+        header
+            {
+                authorization: token
+            }
+    
+... outras rotas disponíveis.
