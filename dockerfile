@@ -1,6 +1,7 @@
 #Instalando OS base do container
-FROM nodejscn/node
+FROM ubuntu
 
+WORKDIR /usr/src/app
 
 #Informacões sobre o container
 LABEL maintainer="Alfredo Neto"
@@ -10,19 +11,18 @@ LABEL descriptio="Container para rodar APP com PM2"
 #Comandos Pos instalacao do OS
 
 RUN apt update
-RUN apt upgrade
-RUN apt install -y npm
+RUN apt DEBIAN_FRONTEND="noninteractive" install -y npm
 RUN npm install pm2 -g
 
 #Como iremos usar postgres em outro container, e o código não vai salvar nada localmente, não vejo utilidade para criação de volumes
 
 #Copiando arquivos do APP para o docker
-COPY . /SUFLEX
+COPY . .
 
 #Install dependencias
-RUN cd ./SUFLEX && npm install
+RUN npm install
 
 EXPOSE 3000
 
 #Criando comando de inicialização
-CMD ["pm2","start", "./SUFLEX/server.js"]
+CMD ["pm2-runtime","start", "./server.js"]
