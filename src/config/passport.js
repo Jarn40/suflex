@@ -9,7 +9,7 @@ passport.use(new passportJwt({
   secretOrKey: 'SUFLEX.WEBTOKEN',
 }, async (payload, done) => {
   try {
-    const user = await db_connection('users').where('id', payload.sub)  
+    const [user] = await db_connection('users').where('id', payload.sub)  
     if (!user) {
       return done(null, false);
     }
@@ -24,7 +24,8 @@ passport.use(new passportLocal({
   usernameField: 'login',
 }, async (login, password, done) => {
   try {
-    const user = await db_connection('users').where('login', login);
+    const [user] = await db_connection('users').where('login', login);
+    
     if (!user) {
       return done(null, false);
     }
